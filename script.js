@@ -163,63 +163,6 @@
     nums.forEach(function (el) { io.observe(el); });
   })();
 
-  /* ---------- Programme tabs ---------- */
-  (function tabs() {
-    var list = $(".tabs__list");
-    if (!list) return;
-    var tabEls = $$(".tab", list);
-    var pill = $("#tabsPill");
-    var panels = $$(".tab-panel");
-
-    function movePill(el) {
-      if (!pill) return;
-      pill.style.width = el.offsetWidth + "px";
-      pill.style.height = el.offsetHeight + "px";
-      pill.style.transform = "translate(" + el.offsetLeft + "px, " + el.offsetTop + "px)";
-    }
-
-    function select(el, focus) {
-      tabEls.forEach(function (t) {
-        var on = t === el;
-        t.classList.toggle("is-active", on);
-        t.setAttribute("aria-selected", String(on));
-        t.tabIndex = on ? 0 : -1;
-      });
-      panels.forEach(function (p) {
-        var on = p.id === el.getAttribute("aria-controls");
-        p.classList.toggle("is-active", on);
-        p.hidden = !on;
-      });
-      movePill(el);
-      if (focus) el.focus();
-    }
-
-    tabEls.forEach(function (t) {
-      t.addEventListener("click", function () { select(t, false); });
-    });
-
-    list.addEventListener("keydown", function (e) {
-      var i = tabEls.indexOf(document.activeElement);
-      if (i < 0) return;
-      var next = null;
-      if (e.key === "ArrowRight") next = tabEls[(i + 1) % tabEls.length];
-      if (e.key === "ArrowLeft") next = tabEls[(i - 1 + tabEls.length) % tabEls.length];
-      if (e.key === "Home") next = tabEls[0];
-      if (e.key === "End") next = tabEls[tabEls.length - 1];
-      if (next) { e.preventDefault(); select(next, true); }
-    });
-
-    var active = tabEls.filter(function (t) { return t.classList.contains("is-active"); })[0] || tabEls[0];
-    requestAnimationFrame(function () { movePill(active); });
-    window.addEventListener("resize", function () {
-      var cur = tabEls.filter(function (t) { return t.classList.contains("is-active"); })[0];
-      if (cur) movePill(cur);
-    });
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () { movePill(active); });
-    }
-  })();
-
   /* ---------- Accordion ---------- */
   (function accordion() {
     $$(".acc").forEach(function (item) {
@@ -276,21 +219,6 @@
         var field = input.closest(".field");
         if (field) field.classList.remove("has-error");
       });
-    });
-  })();
-
-  /* ---------- Play button (placeholder stream) ---------- */
-  (function player() {
-    var btn = $(".player__play");
-    var now = $(".player__now");
-    if (!btn || !now) return;
-    var playing = false;
-    btn.addEventListener("click", function () {
-      playing = !playing;
-      now.innerHTML = playing
-        ? "Live stream connecting — <b>Research Frontiers</b>"
-        : "Now playing — <b>Research Frontiers</b>";
-      btn.setAttribute("aria-label", playing ? "Pause the live stream" : "Play the live stream");
     });
   })();
 

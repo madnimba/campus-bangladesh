@@ -9,7 +9,9 @@ styles.css      design system (tokens at the top) + layout
 script.js       interaction layer (vanilla JS, no dependencies)
 assets/
   favicon.svg   the channel mark, used as the browser icon
-  qr.svg        real, scannable QR code (currently → https://campusbangladesh.tv)
+  logo.png      the official lockup (icon + wordmark), background removed — header, footer, hero
+  qr.svg        real, scannable QR code (currently → https://campusbangladesh.tv, unused since
+                the How to Watch section was removed — kept for when a player section returns)
 ```
 
 ## Design direction
@@ -23,29 +25,43 @@ calm and uncluttered.
 
 - **Two themes.** Dark by default, light available from the toggle in the header
   (the light theme is the poster's white/green side). The choice is remembered per
-  visitor and follows the OS preference on a first visit.
-- **Type.** Space Grotesk for display, Inter for text, Hind Siliguri for Bangla.
+  visitor and follows the OS preference on a first visit. The light theme uses
+  banded surfaces (`--bg` / `--bg-2` / `--bg-3`, each a distinct mint-green tint,
+  not near-white) plus a darker `--green-deep` accent for body-sized text/icons,
+  so it reads as a designed page rather than "mostly white" — `--green-bright`
+  stays reserved for filled swatches (buttons, badges) where it has its own
+  background to sit on.
+- **Type.** Sora for display, Inter for text, Hind Siliguri for Bangla.
 - **Motion.** Reveal-on-scroll, animated counters, orbiting satellite, marquees and
   the starfield all switch off automatically under `prefers-reduced-motion`.
 
 ### Sections
 
-Hero → stats → 01 About → 02 What we do (the six pillars from the poster) →
-03 Programmes (tabbed line-up) → 04 How to watch → 05 Partner network →
-06 Get involved → 07 FAQ + contact form → CTA band → footer.
+Hero → stats → 01 About → 02 What we do (the six pillars from the poster, each
+filled with its own soft accent colour, not just tinted on hover) → 03 Partner
+network → 04 Get involved → 05 FAQ + contact form → CTA band → footer.
+
+The header also carries a "Concept Paper" link (opens the official document in
+a new tab) next to the disabled "Watch Live" button — update its `href` in
+`index.html` if the document moves.
+
+Programmes and How to watch have been removed for now. Every "Watch Live" /
+"Start watching" control (nav, hero, CTA band) and the "Watch" nav item are kept
+but rendered as inert "Soon" placeholders (`.is-disabled` / `.nav__soon`) rather
+than deleted, so they can be re-enabled once there's a section/player for them
+to point to.
 
 ## Interactions
 
 Sticky nav with scroll progress and active-section highlighting · mobile menu ·
-theme toggle · cursor spotlight and card glow · animated statistics · keyboard-
-accessible programme tabs (arrow keys / Home / End) · FAQ accordion · floating-label
-contact form with validation · play button on the live player · back-to-top button.
+theme toggle · cursor spotlight and card glow · animated statistics · FAQ
+accordion · floating-label contact form with validation · back-to-top button.
 
 ## Accessibility
 
-Skip link, visible focus rings, ARIA roles on the tab list and accordion, live
-region on the form status, alt text on the QR, and full keyboard operation.
-Decorative layers (starfield, aurora, orbit) are `aria-hidden`.
+Skip link, visible focus rings, ARIA roles on the accordion, live region on the
+form status, and full keyboard operation. Decorative layers (starfield, aurora,
+orbit) are `aria-hidden`.
 
 ## What is placeholder content
 
@@ -55,22 +71,19 @@ real information arrives.
 | Where | Placeholder |
 | --- | --- |
 | Hero / stats | 160+ universities, 45 lakh+ reach, 24/7 |
-| Programmes | All 12 shows and their times (labelled "sample schedule") |
-| How to watch | Satellite frequency, cable tier, app availability |
 | Partners | 12 university names as text badges — no official crests are used |
 | Footer | `info@campusbangladesh.tv`, phone number, UGC address |
-| `assets/qr.svg` | Encodes `https://campusbangladesh.tv` |
 
 ## How to change things
 
 **Colours, spacing, radius, fonts** — the tokens in `:root` and `[data-theme="light"]`
 at the top of `styles.css`. Change `--green-bright` / `--red` and the whole site follows.
 
-**The logo.** The mark is an inline SVG (`<symbol id="mark">` at the top of
-`index.html`, mirrored in `assets/favicon.svg`) drawn to match the poster. To use the
-official artwork instead, drop it in `assets/` and replace the two
-`<span class="brand__mark">…</span>` blocks and the one inside `.orbit__core` with
-`<img src="assets/logo.svg" alt="Campus Bangladesh">`.
+**The logo.** The header, footer and hero orbit all use the official lockup at
+`assets/logo.png` via `<img class="brand__logo" src="assets/logo.png" alt="Campus Bangladesh">`
+(hero orbit: `.orbit__core img`, no class needed). To swap the artwork, replace that
+file — same filename, any aspect ratio works since it's sized with `height`/`object-fit`,
+not fixed dimensions. `assets/favicon.svg` is separate and unaffected.
 
 **The QR code.** Regenerate for the real URL:
 
@@ -91,8 +104,17 @@ seamlessly.
 sends nothing. Point it at a real endpoint in the `form()` block of `script.js`
 (or add `action`/`method` to the `<form>` and delete the `preventDefault`).
 
-**The player** is a styled placeholder. Replace `.player__screen` with the real
-`<iframe>` or `<video>` embed when the stream exists.
+**The six commitment cards** (`#focus`) each carry a `data-hue` attribute
+(`teal` / `violet` / `amber` / `coral` / `blue` / `rose`) that drives their icon,
+background tint and accent line via the `--fc-h` custom property in `styles.css`
+section 10. Reassign or add hues there.
+
+**Re-enabling Watch / Programmes.** Both sections were removed along with the
+tab and player interactions in `script.js`. Every button that used to point at
+`#watch` (nav, hero, CTA band) is kept as a disabled `.btn.is-disabled` with a
+`.btn__soon` badge, and the nav's "Watch" item is a disabled `.nav__soon` span —
+re-add the section markup, restore `href="#watch"` / turn the `<span>` back into
+an `<a>`, and drop the `is-disabled`/`disabled`/`aria-disabled` attributes.
 
 ## Deploying
 

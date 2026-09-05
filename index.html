@@ -12,7 +12,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <script>
   /* Set the theme before first paint so there is no flash. */
@@ -27,17 +27,6 @@
 </head>
 <body>
 
-<!-- ================= SVG sprite ================= -->
-<svg class="sprite" aria-hidden="true" focusable="false">
-  <symbol id="mark" viewBox="0 0 150 180">
-    <circle cx="37" cy="19" r="11"/>
-    <circle cx="97" cy="15" r="11"/>
-    <path d="M57 60 L42 30" stroke="currentColor" stroke-width="9" stroke-linecap="round" fill="none"/>
-    <path d="M71 60 L92 27" stroke="currentColor" stroke-width="9" stroke-linecap="round" fill="none"/>
-    <path d="M16 100C16 74 32 56 60 56L146 56C126 74 108 78 80 78C62 78 50 88 50 108L50 170C30 162 16 138 16 116Z"/>
-  </symbol>
-</svg>
-
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
 <div class="spotlight" aria-hidden="true"></div>
@@ -47,18 +36,14 @@
 <header class="nav" id="nav">
   <div class="nav__inner">
     <a class="brand" href="#home" aria-label="Campus Bangladesh — home">
-      <span class="brand__mark"><svg viewBox="0 0 150 180" aria-hidden="true"><use href="#mark"/></svg></span>
-      <span class="brand__text">
-        <span class="brand__name">Campus <em>Bangladesh</em></span>
-        <span class="brand__sub">A UGC-run Satellite TV Channel</span>
-      </span>
+      <img class="brand__logo" src="assets/logo.png" alt="Campus Bangladesh" />
+      <span class="brand__sub">A UGC-run Satellite TV Channel</span>
     </a>
 
     <nav class="nav__links" id="navLinks" aria-label="Primary">
       <a href="#about">About</a>
       <a href="#focus">What We Do</a>
-      <a href="#programmes">Programmes</a>
-      <a href="#watch">Watch</a>
+      <span class="nav__soon" aria-disabled="true">Watch<i>Soon</i></span>
       <a href="#partners">Partners</a>
       <a href="#join">Join</a>
     </nav>
@@ -68,7 +53,8 @@
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.8v2.2M12 19v2.2M5 12H2.8M21.2 12H19M6 6l1.6 1.6M16.4 16.4 18 18M18 6l-1.6 1.6M7.6 16.4 6 18"/></g></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2Z"/></svg>
       </button>
-      <a class="btn btn--primary btn--sm" href="#watch"><span class="live-dot"></span> Watch Live</a>
+      <button class="btn btn--primary btn--sm is-disabled" type="button" disabled aria-disabled="true"><span class="live-dot live-dot--off"></span> Watch Live <span class="btn__soon">Soon</span></button>
+      <a class="btn btn--ghost btn--sm" href="https://drive.google.com/drive/folders/1QyAz2htd6XvbDVBigtf-Anr-Pc00G9cl?usp=sharing" target="_blank" rel="noopener noreferrer">Concept Paper</a>
       <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
     </div>
   </div>
@@ -84,7 +70,7 @@
 
   <div class="container hero__inner">
     <div class="hero__copy">
-      <p class="eyebrow reveal"><span class="eyebrow__dot"></span> University Grants Commission of Bangladesh</p>
+      <p class="eyebrow reveal">A UGC-run Satellite TV Channel</p>
 
       <h1 class="hero__title reveal" data-delay="1">
         <span class="line">Connecting</span>
@@ -101,8 +87,7 @@
       </p>
 
       <div class="hero__cta reveal" data-delay="4">
-        <a class="btn btn--primary" href="#watch"><span class="live-dot"></span> Watch Live</a>
-        <a class="btn btn--ghost" href="#programmes">Explore Programmes <span class="btn__arrow">→</span></a>
+        <button class="btn btn--primary is-disabled" type="button" disabled aria-disabled="true"><span class="live-dot live-dot--off"></span> Watch Live <span class="btn__soon">Soon</span></button>
       </div>
 
       <div class="ticker reveal" data-delay="5" aria-label="Now on air">
@@ -130,7 +115,7 @@
         <span class="orbit__sat orbit__sat--a"></span>
         <span class="orbit__sat orbit__sat--b"></span>
         <div class="orbit__core">
-          <svg viewBox="0 0 150 180"><use href="#mark"/></svg>
+          <img src="assets/logo.png" alt="Campus Bangladesh" />
           <span class="orbit__pulse"></span>
           <span class="orbit__pulse orbit__pulse--2"></span>
         </div>
@@ -221,7 +206,7 @@
     </header>
 
     <div class="focus__grid">
-      <article class="focus-card reveal" data-delay="0" tabindex="0">
+      <article class="focus-card reveal" data-delay="0" data-hue="teal" tabindex="0">
         <span class="focus-card__no">01</span>
         <span class="focus-card__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8 3 7.4l9 4.6 9-4.6-9-4.6Z"/><path d="M6.4 9.6V15c0 1.9 2.5 3.4 5.6 3.4s5.6-1.5 5.6-3.4V9.6"/></svg></span>
         <h3>Creating an eco-system for tertiary education</h3>
@@ -229,7 +214,7 @@
         <span class="focus-card__line"></span>
       </article>
 
-      <article class="focus-card reveal" data-delay="1" tabindex="0">
+      <article class="focus-card reveal" data-delay="1" data-hue="violet" tabindex="0">
         <span class="focus-card__no">02</span>
         <span class="focus-card__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.6" cy="10.6" r="6.4"/><path d="M15.4 15.4 21 21"/></svg></span>
         <h3>Supporting research and innovation</h3>
@@ -237,7 +222,7 @@
         <span class="focus-card__line"></span>
       </article>
 
-      <article class="focus-card reveal" data-delay="2" tabindex="0">
+      <article class="focus-card reveal" data-delay="2" data-hue="amber" tabindex="0">
         <span class="focus-card__no">03</span>
         <span class="focus-card__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 20.4H4.8A1.8 1.8 0 0 1 3 18.6V6.4a1.8 1.8 0 0 1 1.8-1.8h14.4A1.8 1.8 0 0 1 21 6.4v12.2a1.8 1.8 0 0 1-1.8 1.8h-3.8"/><path d="M12 8.6v8M8.4 12.2h7.2"/></svg></span>
         <h3>Knowledge sharing &amp; public engagement</h3>
@@ -245,7 +230,7 @@
         <span class="focus-card__line"></span>
       </article>
 
-      <article class="focus-card reveal" data-delay="0" tabindex="0">
+      <article class="focus-card reveal" data-delay="0" data-hue="coral" tabindex="0">
         <span class="focus-card__no">04</span>
         <span class="focus-card__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4 14.7 9l6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.9 9.3 9 12 3.4Z"/></svg></span>
         <h3>Strengthening co-curricular learning</h3>
@@ -253,7 +238,7 @@
         <span class="focus-card__line"></span>
       </article>
 
-      <article class="focus-card reveal" data-delay="1" tabindex="0">
+      <article class="focus-card reveal" data-delay="1" data-hue="blue" tabindex="0">
         <span class="focus-card__no">05</span>
         <span class="focus-card__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7.4" width="18" height="12.6" rx="2"/><path d="M8.6 7.4V5.6a1.8 1.8 0 0 1 1.8-1.8h3.2a1.8 1.8 0 0 1 1.8 1.8v1.8"/><path d="M3 12.4h18"/></svg></span>
         <h3>Enhancing graduate employability</h3>
@@ -261,7 +246,7 @@
         <span class="focus-card__line"></span>
       </article>
 
-      <article class="focus-card reveal" data-delay="2" tabindex="0">
+      <article class="focus-card reveal" data-delay="2" data-hue="rose" tabindex="0">
         <span class="focus-card__no">06</span>
         <span class="focus-card__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.4h16v11H4z"/><path d="M8.4 20.6h7.2"/><path d="M10.2 8.8 14.6 11l-4.4 2.2V8.8Z"/></svg></span>
         <h3>Making learning engaging &amp; enjoyable</h3>
@@ -272,109 +257,11 @@
   </div>
 </section>
 
-<!-- ================= Programmes ================= -->
-<section class="section programmes" id="programmes">
-  <div class="container">
-    <header class="section-head section-head--row">
-      <div>
-        <p class="kicker reveal">03 — Programmes</p>
-        <h2 class="h2 reveal" data-delay="1">The weekly line-up.</h2>
-      </div>
-      <p class="lead reveal" data-delay="2">Four strands, refreshed every week and archived on demand. <em>Sample schedule — final line-up to be announced.</em></p>
-    </header>
-
-    <div class="tabs reveal" data-delay="2">
-      <div class="tabs__list" role="tablist" aria-label="Programme strands">
-        <button class="tab is-active" role="tab" id="tab-learn" aria-controls="panel-learn" aria-selected="true">Learning</button>
-        <button class="tab" role="tab" id="tab-research" aria-controls="panel-research" aria-selected="false" tabindex="-1">Research</button>
-        <button class="tab" role="tab" id="tab-life" aria-controls="panel-life" aria-selected="false" tabindex="-1">Campus Life</button>
-        <button class="tab" role="tab" id="tab-career" aria-controls="panel-career" aria-selected="false" tabindex="-1">Careers</button>
-        <span class="tabs__pill" id="tabsPill" aria-hidden="true"></span>
-      </div>
-
-      <div class="tabs__panels">
-        <div class="tab-panel is-active" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn">
-          <article class="show"><span class="show__time">Sun · 20:00</span><h3>Open Lecture Hall</h3><p>A full lecture from a leading faculty member, taped before a live student audience.</p><span class="show__meta">45 min · Bangla</span></article>
-          <article class="show"><span class="show__time">Tue · 18:30</span><h3>Concept Clinic</h3><p>Hard ideas from first-year syllabuses, unpacked on a whiteboard in twenty minutes.</p><span class="show__meta">20 min · Bangla</span></article>
-          <article class="show"><span class="show__time">Thu · 21:00</span><h3>Library Hours</h3><p>Reading, note-taking and study craft, with the students who have figured it out.</p><span class="show__meta">30 min · Bangla</span></article>
-        </div>
-
-        <div class="tab-panel" id="panel-research" role="tabpanel" aria-labelledby="tab-research" hidden>
-          <article class="show"><span class="show__time">Mon · 21:00</span><h3>Research Frontiers</h3><p>One paper, one lab, one week — from hypothesis to published result.</p><span class="show__meta">40 min · Bangla &amp; English</span></article>
-          <article class="show"><span class="show__time">Wed · 19:30</span><h3>Innovation Lab</h3><p>Student teams building drones, apps, prosthetics and machines that solve local problems.</p><span class="show__meta">30 min · Bangla</span></article>
-          <article class="show"><span class="show__time">Sat · 17:00</span><h3>Grant Desk</h3><p>Funding calls, fellowships and how to write the proposal that wins one.</p><span class="show__meta">25 min · Bangla</span></article>
-        </div>
-
-        <div class="tab-panel" id="panel-life" role="tabpanel" aria-labelledby="tab-life" hidden>
-          <article class="show"><span class="show__time">Fri · 20:30</span><h3>Campus Diaries</h3><p>A week in the life of one campus — halls, canteens, clubs and the people in them.</p><span class="show__meta">35 min · Bangla</span></article>
-          <article class="show"><span class="show__time">Fri · 22:00</span><h3>Inter-University Stage</h3><p>Debate finals, band nights, theatre and the national culture circuit.</p><span class="show__meta">60 min · Bangla</span></article>
-          <article class="show"><span class="show__time">Sat · 19:00</span><h3>Field &amp; Court</h3><p>University sport, from the athletics meet to the intra-hall cricket rivalry.</p><span class="show__meta">45 min · Bangla</span></article>
-        </div>
-
-        <div class="tab-panel" id="panel-career" role="tabpanel" aria-labelledby="tab-career" hidden>
-          <article class="show"><span class="show__time">Mon · 18:00</span><h3>Career Compass</h3><p>CVs, interviews and first jobs, with recruiters saying what they actually look for.</p><span class="show__meta">30 min · Bangla</span></article>
-          <article class="show"><span class="show__time">Wed · 21:30</span><h3>Industry Floor</h3><p>Inside the workplaces hiring graduates — factories, studios, hospitals, startups.</p><span class="show__meta">35 min · Bangla</span></article>
-          <article class="show"><span class="show__time">Thu · 19:00</span><h3>Skills Sprint</h3><p>One employable skill per episode, taught end to end and free to follow along.</p><span class="show__meta">25 min · Bangla</span></article>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= Watch ================= -->
-<section class="section watch" id="watch">
-  <div class="watch__bg" aria-hidden="true"></div>
-  <div class="container watch__grid">
-    <div class="watch__copy">
-      <p class="kicker reveal">04 — How to watch</p>
-      <h2 class="h2 reveal" data-delay="1">Free to air.<br/><span class="grad">Free to everyone.</span></h2>
-      <p class="lead reveal" data-delay="2">
-        Tune in by satellite, cable or stream. No subscription, no paywall — a public
-        channel for a public good.
-      </p>
-
-      <ul class="watch__list">
-        <li class="reveal" data-delay="2">
-          <span class="watch__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.4 19.6a11.2 11.2 0 0 1 0-15.2"/><path d="M8.2 16a6 6 0 0 1 0-8.4"/><circle cx="12.4" cy="11.8" r="2"/><path d="M13.8 13.2 20 19.6"/></svg></span>
-          <div><h3>Satellite (free-to-air)</h3><p>Bangabandhu-1 · Ku-band · frequency and symbol rate to be announced at launch.</p></div>
-        </li>
-        <li class="reveal" data-delay="3">
-          <span class="watch__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="4.6" width="18.4" height="12.4" rx="1.8"/><path d="M8.4 20.6h7.2"/></svg></span>
-          <div><h3>Cable &amp; IPTV</h3><p>Carried by national DTH and cable operators on the education tier.</p></div>
-        </li>
-        <li class="reveal" data-delay="4">
-          <span class="watch__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.6" width="10" height="18.8" rx="2.2"/><path d="M11 18.6h2"/></svg></span>
-          <div><h3>Stream &amp; on demand</h3><p>Live stream and full archive on the web, plus the Campus Bangladesh app.</p></div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="player reveal" data-delay="3">
-      <div class="player__frame">
-        <div class="player__screen">
-          <span class="player__scan" aria-hidden="true"></span>
-          <span class="player__badge"><span class="live-dot"></span> LIVE</span>
-          <div class="player__center">
-            <button class="player__play" type="button" aria-label="Play the live stream"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 5.6 18.6 12 8.4 18.4V5.6Z"/></svg></button>
-            <p class="player__now">Now playing — <b>Research Frontiers</b></p>
-            <p class="player__next">Up next, 21:40 — Campus Diaries</p>
-          </div>
-          <div class="player__bar" aria-hidden="true"><span></span></div>
-        </div>
-      </div>
-      <div class="player__caption">
-        <img class="qr" src="assets/qr.svg" width="72" height="72" alt="QR code linking to campusbangladesh.tv" loading="lazy" />
-        <p>Scan for schedules, the live stream and the full programme archive.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ================= Partners ================= -->
 <section class="section partners" id="partners">
   <div class="container">
     <header class="section-head section-head--center">
-      <p class="kicker reveal">05 — The network</p>
+      <p class="kicker reveal">03 — The network</p>
       <h2 class="h2 reveal" data-delay="1">Built with the<br/>universities of Bangladesh.</h2>
       <p class="lead reveal" data-delay="2">Public and private, national and specialised — campuses across the country contribute stories, faculty and student crews.</p>
     </header>
@@ -424,7 +311,7 @@
 <section class="section join" id="join">
   <div class="container">
     <header class="section-head">
-      <p class="kicker reveal">06 — Get involved</p>
+      <p class="kicker reveal">04 — Get involved</p>
       <h2 class="h2 reveal" data-delay="1">Your campus belongs on air.</h2>
       <p class="lead reveal" data-delay="2">Three ways to take part — whether you are a student with a camera, a researcher with a result, or a university with a story to tell.</p>
     </header>
@@ -456,7 +343,7 @@
 <section class="section contact" id="contact">
   <div class="container contact__grid">
     <div class="faq">
-      <p class="kicker reveal">07 — Questions</p>
+      <p class="kicker reveal">05 — Questions</p>
       <h2 class="h2 reveal" data-delay="1">Good to know.</h2>
 
       <div class="accordion reveal" data-delay="2">
@@ -526,7 +413,7 @@
 <section class="cta-band">
   <div class="container cta-band__inner reveal">
     <h2>Connecting campuses.<br/><span class="grad">Inspiring futures.</span></h2>
-    <a class="btn btn--primary btn--lg" href="#watch"><span class="live-dot"></span> Start watching</a>
+    <button class="btn btn--primary btn--lg is-disabled" type="button" disabled aria-disabled="true"><span class="live-dot live-dot--off"></span> Start watching <span class="btn__soon">Soon</span></button>
   </div>
 </section>
 
@@ -537,11 +424,8 @@
   <div class="container footer__grid">
     <div class="footer__brand">
       <a class="brand brand--footer" href="#home">
-        <span class="brand__mark"><svg viewBox="0 0 150 180" aria-hidden="true"><use href="#mark"/></svg></span>
-        <span class="brand__text">
-          <span class="brand__name">Campus <em>Bangladesh</em></span>
-          <span class="brand__sub">A UGC-run Satellite TV Channel</span>
-        </span>
+        <img class="brand__logo" src="assets/logo.png" alt="Campus Bangladesh" />
+        <span class="brand__sub">A UGC-run Satellite TV Channel</span>
       </a>
       <p class="footer__blurb">Connecting &amp; collaborating tertiary education in Bangladesh.</p>
       <div class="socials">
@@ -556,8 +440,7 @@
       <h4>Channel</h4>
       <a href="#about">About</a>
       <a href="#focus">What we do</a>
-      <a href="#programmes">Programmes</a>
-      <a href="#watch">How to watch</a>
+      <a href="#join">Get involved</a>
     </div>
     <div class="footer__col">
       <h4>Network</h4>
@@ -575,7 +458,7 @@
   </div>
 
   <div class="container footer__bottom">
-    <p>© <span id="year">2026</span> Campus Bangladesh · University Grants Commission of Bangladesh</p>
+    <p>© <span id="year">2026</span> University Grants Commission of Bangladesh</p>
     <p class="footer__tag">Connecting &amp; Collaborating Tertiary Education in Bangladesh</p>
   </div>
 </footer>
